@@ -19,9 +19,8 @@ if not table_exists:
                       (link TEXT, color TEXT, price INTEGER)''')
     conn.commit()
 
-
 def format_print(name_f):
-    df = pd.read_excel(f"/python/test_task/{name_f}")
+    df = pd.read_excel(f"{name_f}")
     # Вывести таблицу в формате xlsx
     conn = sqlite3.connect('parsing.db')
     cursor = conn.cursor()
@@ -49,7 +48,7 @@ def format_print(name_f):
 
 def print_max(name_f):
     a ="Средняя цена за кружку на сайте:\n"
-    df = pd.read_excel(f"/python/test_task/{name_f}")
+    df = pd.read_excel(f"{name_f}")
     avg_prices = df.groupby('Сайт')['Цена'].mean().reset_index()
     for index, row in avg_prices.iterrows():
         a += f"{row['Сайт']} составляет: {int(row['Цена'])} \n"
@@ -82,7 +81,7 @@ def handle_link(message):
         bot.send_message(message.chat.id, print_max(name_ff))
     except Exception as e:
         bot.reply_to(message, "Похоже ваш файл не удовлетворяет условию")
-        os.remove(f"/python/test_task/{name_ff}")
+        os.remove(f"{name_ff}")
 @bot.message_handler(content_types=['document'])
 def handle_document(message):
     # Получаем информацию о файле
@@ -99,7 +98,7 @@ def handle_document(message):
         bot.send_message(message.chat.id, print_max(name_file))
     except Exception as e:
         bot.reply_to(message, "Похоже ваш файл не удовлетворяет условию")
-        os.remove(f"/python/test_task/{name_file}")
+        os.remove(f"{name_file}")
 
 
 bot.polling(none_stop=True, interval=0)
