@@ -2,7 +2,7 @@ pip install pandas
 pip install pyTelegramBotAPI
 pip install requests
 
-
+ссылка на бота: https://t.me/test_ExElbot
 
 
 tabl2.xlsx файл для проверки работоспособности бота
